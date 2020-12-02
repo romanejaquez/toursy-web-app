@@ -1,0 +1,5 @@
+<div class="top-rated-list">
+    <ng-container *ngFor="let tile of topRatedTiles">
+        <toursy-tile [tileModel]="tile" (click)="onTileClick()"></toursy-tile>
+    </ng-container>
+</div>

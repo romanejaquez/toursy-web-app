@@ -1,0 +1,55 @@
+@import './../../../assets/styles/colors.scss';
+
+.app-splash-screen {
+    background: $main-green;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    opacity: 1;
+  }
+  
+  .app-label {
+    background: url("./../../../assets/icons/toursy_logo_letters.svg");
+    background-repeat: no-repeat;
+    max-width: 100%;
+    background-position: center;
+    background-size: contain;
+    width: 150px;
+    height: 100px;
+  }
+  
+  .app-splash-inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+    
+    .app-logo {
+      background: url("./../../../assets/icons/toursy_logo.svg");
+      background-repeat: no-repeat;
+      max-width: 100%;
+      background-position: center;
+      background-size: contain;
+      width: 100px;
+      height: 100px;
+    }
+    
+    .app-loader {
+      background: url("./../../../assets/icons/three-dots.svg");
+      background-repeat: no-repeat;
+      max-width: 100%;
+      background-position: center;
+      background-size: contain;
+      width: 60px;
+      height: 60px;
+      margin-top: 100px;
+    }

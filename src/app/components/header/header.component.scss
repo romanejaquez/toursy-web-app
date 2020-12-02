@@ -1,0 +1,33 @@
+@import './../../../assets/styles/colors.scss';
+
+.app-header {
+    background: $main-green;
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    box-shadow: 0px 0px 12px rgba(0,0,0, 0.2);
+    position: relative;
+    z-index: 2;
+
+    .app-header-menu {
+        margin-left: 12px;
+
+        .material-icons {
+            color: #FFF;
+            font-size: 1.6em;
+        }
+    }
+
+    .app-header-logo {
+        background: url('./../../../assets/icons/toursy_logo_letters.svg') no-repeat;
+        background-position: center;
+        background-size: contain;
+        width: 30px;
+        height: 40px;
+        flex: 1;
+    }
+
+    .app-header-right {
+        width: 40px;
+    }
+}

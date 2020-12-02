@@ -1,0 +1,22 @@
+<div class="details-page">
+    <div class="details-page-container">
+        <div class="attraction-img" [style.background-image]="'url(' + currentAttraction.attractionData.img + ')'"></div>
+        <div class="attraction-details">
+            <div class="attraction-details-top">
+                <div class="attraction-details-top-left">
+                    <div>{{ currentAttraction.attractionData.name }}</div>
+                    <div>{{ currentAttraction.attractionData.province }}</div>
+                </div>
+                <div class="attraction-details-top-left">
+                    <span (click)="favorited = !favorited" class="material-icons">{{ favorited ? 'favorite' : 'favorite_border' }}</span>
+                </div>
+            </div>
+            <div class="attraction-details-bottom">
+                <div class="attraction-info" [innerHTML]="currentAttraction.attractionData.fullDescription"></div>
+                <div class="attraction-video-section">
+                    <iframe src="https://www.youtube.com/embed/MDZYfFYJFf0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+.main-page-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .main-page-viewport {
+        flex: 1;
+        padding: 12px;
+        overflow-y: auto;
+    }
+}

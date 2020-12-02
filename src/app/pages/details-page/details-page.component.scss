@@ -1,0 +1,58 @@
+@import './../../../assets/styles/colors.scss';
+
+.details-page {
+    overflow-y: auto;
+    position: absolute;
+    top: 56px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+}
+
+.attraction-img {
+    min-height: 200px;
+    background-size: cover !important;
+    background-position: center !important;
+    border-bottom-left-radius: 60px;
+}
+
+.attraction-details {
+    padding: 24px;
+
+    .attraction-details-top {
+        display: flex;
+        justify-content: space-between;
+
+        .attraction-details-top-left {
+            font-size: 1.5em;
+
+            div:first-child {
+                font-weight: 600;
+                color: $darker-green;
+            }
+
+            div:last-child {
+                font-size: 0.8em;
+                color: grey;
+            }
+        }
+    }
+
+    .attraction-details-bottom {
+        color: grey;
+        margin-top: 24px;
+        border-top: 1px solid #f1f1f1;
+        padding-top: 24px;
+        font-size: 0.9em;
+
+        .attraction-video-section {
+            margin: 24px 0px;
+
+            iframe {
+                width: 100%;
+                height: 200px;
+            }
+        }
+    }
+}

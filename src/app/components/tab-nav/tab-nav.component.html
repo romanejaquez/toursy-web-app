@@ -1,0 +1,10 @@
+<nav class="tab-navigation">
+    <ng-container *ngFor="let tabItem of tabItems">
+        <a routerLink="{{ tabItem.route }}" routerLinkActive="selected">
+            <div class="tab-item">
+                <img src="./assets/icons/icon_{{ tabItem.icon }}.svg" />
+                <span class="tab-item-label">{{ tabItem.label }}</span>
+            </div>
+        </a>
+    </ng-container>
+</nav>
