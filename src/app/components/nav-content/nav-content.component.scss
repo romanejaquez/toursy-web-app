@@ -1,0 +1,18 @@
+@import './../../../assets/styles/colors.scss';
+
+.side-nav-links {
+    display: flex;
+    flex-direction: column;
+
+    a {
+        text-decoration: none;
+        color: $darker-green;
+        margin: 12px 0px;
+        display: flex;
+        align-items: center;
+
+        .material-icons {
+            margin-right: 6px;
+        }
+    }
+}

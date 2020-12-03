@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { NavigationService } from 'src/app/services/navigation.service';
 
 @Component({
   selector: 'app-header',
@@ -8,8 +9,13 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
+  constructor(private navigationService: NavigationService) {}
+
   ngOnInit(): void {
     
   }
 
+  onToggleMenu() {
+    this.navigationService.setShowNav(true);
+  }
 }
