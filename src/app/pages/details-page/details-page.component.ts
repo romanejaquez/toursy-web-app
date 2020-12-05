@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
@@ -16,6 +17,7 @@ export class DetailsPageComponent implements OnInit {
   favorited: boolean = false;
 
   constructor(
+    public location: Location,
     public sanitizer: DomSanitizer,
     private activatedRoute: ActivatedRoute,
     private proxyService: ProxyService) { }
@@ -26,6 +28,10 @@ export class DetailsPageComponent implements OnInit {
       this.currentAttraction = this.proxyService.getAttractionById(attractionId);
       this.currentAttraction.video = 'https://www.youtube.com/embed/' + this.currentAttraction.video;
     });
+  }
+
+  onBackClick(): void {
+    this.location.back();
   }
 
 }
