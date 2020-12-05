@@ -2,5 +2,13 @@
 [animationType]="0"
 [duration]="2"
 [animationDuration]="0.5"></splash-screen>
+<side-nav
+[sidenavTemplateRef]="navContent"
+[navWidth]="280" 
+[duration]="0.5"></side-nav>
 <app-header></app-header>
 <router-outlet></router-outlet>
+
+<ng-template #navContent>
+  <app-nav-content></app-nav-content>
+</ng-template>

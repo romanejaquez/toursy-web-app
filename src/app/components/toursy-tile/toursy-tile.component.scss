@@ -2,12 +2,13 @@
     min-height: 170px;
     background-size: cover !important;
     background-position: center !important;
+    background-color: #CECECE;
     margin: 24px 15px;
     padding: 20px;
     position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: flex-start;
     color: #FFF;
     border-top-left-radius: 40px;
@@ -32,5 +33,11 @@
         left: 0;
         right: 0;
         border-bottom-right-radius: 40px;
+    }
+
+    .toursy-tile-top {
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
     }
 }

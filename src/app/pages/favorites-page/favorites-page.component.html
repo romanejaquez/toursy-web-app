@@ -1,1 +1,16 @@
-<p>favorites-page works!</p>
+<div class="favorites-page">
+    <sub-header [title]="'My Favorites'" [icon]="'favorite'"></sub-header>
+    <div class="favorites-page-container">
+        <div *ngIf="(favoriteTiles | async).length > 0" class="favorites-page-container-list">
+            <ng-container *ngFor="let tile of favoriteTiles | async">
+                <toursy-tile [tileModel]="tile"></toursy-tile>
+            </ng-container>
+        </div>
+    </div>
+    <div class="no-favorites-page-container" *ngIf="(favoriteTiles | async).length === 0">
+        <div class="no-favorites-panel">
+            <img src="./assets/icons/toursy_logo_green.svg" />
+            <div class="no-favorites-label">You don't have any favorites added!</div>
+        </div>
+    </div>
+</div>

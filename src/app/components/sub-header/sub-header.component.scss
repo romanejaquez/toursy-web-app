@@ -1,0 +1,23 @@
+@import './../../../assets/styles/colors.scss';
+
+.sub-header {
+    color: #FFF;
+    font-size: 1.5em;
+    padding: 20px;
+    background: $tab-selected;
+    box-shadow: 0px 0px 20px rgba(40,136,108, 0.5);
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+
+    .material-icons {
+        margin-right: 10px;
+    }
+
+    .sub-header-title {
+        .sub-header-title-sm {
+            font-size: 0.6em;
+        }
+    }
+}

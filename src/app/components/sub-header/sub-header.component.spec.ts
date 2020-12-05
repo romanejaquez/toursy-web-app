@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TopRatedPageComponent } from './top-rated-page.component';
+import { SubHeaderComponent } from './sub-header.component';
 
-describe('TopRatedPageComponent', () => {
-  let component: TopRatedPageComponent;
-  let fixture: ComponentFixture<TopRatedPageComponent>;
+describe('SubHeaderComponent', () => {
+  let component: SubHeaderComponent;
+  let fixture: ComponentFixture<SubHeaderComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TopRatedPageComponent ]
+      declarations: [ SubHeaderComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TopRatedPageComponent);
+    fixture = TestBed.createComponent(SubHeaderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
