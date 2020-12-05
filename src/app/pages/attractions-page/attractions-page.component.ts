@@ -55,7 +55,6 @@ export class AttractionsPageComponent implements OnInit {
       });
       this.attractionTiles = processedAttractions;
     });
-    this.proxyService.callAttractionsAPIByType(this.attractionType);
   }
 
   ngOnDestroy(): void {

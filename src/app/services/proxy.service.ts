@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Observer } from 'rxjs';
+import { BehaviorSubject, forkJoin, observable, Observable, Observer } from 'rxjs';
 
 const BASE_URL = 'https://us-central1-toursy-242912.cloudfunctions.net/';
 
@@ -16,6 +16,30 @@ export class ProxyService {
 
   constructor(private httpClient: HttpClient) { }
 
+  fetchInitialData() {
+    this.getAllAppData().subscribe(done => {
+      // data is done loading
+    });
+  }
+
+  getAllAppData() {
+    return new Observable<any>((observer: Observer<any>) => {
+      forkJoin(
+        this.getAllAttractionsAPI(),
+        this.getAttractionsByActivityAPI(),
+        this.getTopAttractionsAPI()).subscribe(
+          response => {
+            observer.next({});
+            observer.complete();
+          },
+          error => {
+            observer.error(error);
+            observer.complete();
+          }
+        )
+    });
+  }
+
   getTopAttractions() {
     return this.topAttractions$.asObservable();
   }
@@ -29,51 +53,78 @@ export class ProxyService {
   }
 
   // get All Attractions
-  getAllAttractionsAPI() {
-    if (this.allAttractionsList$.value.length === 0) {
-      this.httpClient.get(`${BASE_URL}getAllAttractions`)
-      .subscribe((response: any) => {
-        this.allAttractionsList$.next(response.templateData.attractionsByRegion.map((attraction: any) => {
-          return { ...attraction.regionData, isSelected: false }
-        }));
-      },
-      error => {
-        // handle the error
-      });
-    }
+  getAllAttractionsAPI(): Observable<any> {
+    return new Observable<any>((observer: Observer<any>) => {
+      if (this.allAttractionsList$.value.length === 0) {
+        this.httpClient.get(`${BASE_URL}getAllAttractions`)
+          .subscribe((response: any) => {
+            this.allAttractionsList$.next(response.templateData.attractionsByRegion.map((attraction: any) => {
+              return { ...attraction.regionData, isSelected: false }
+            }));
+
+            observer.next({});
+            observer.complete();
+          },
+          error => {
+            observer.error(error);
+            observer.complete();
+          });
+      }
+      else {
+        observer.complete();
+      }
+    });
   }
 
   // get Attractions by Activity
-  getAttractionsByActivityAPI() {
-    
-    if (this.attractionsByActivityList$.value.length === 0) {
-      this.httpClient.get(`${BASE_URL}getAttractionsByActivity`)
-      .subscribe((response: any) => {
-          this.attractionsByActivityList$.next(response.templateData.attractionsByActivity.map((attraction: any) => {
-            return { ...attraction.activityData, isSelected: false }
-          }));
-      },
-      error => {
-        // todo: handle error
-      });
-    }
+  getAttractionsByActivityAPI(): Observable<any> {
+    return new Observable<any>((observer: Observer<any>) => {
+      if (this.attractionsByActivityList$.value.length === 0) {
+        this.httpClient.get(`${BASE_URL}getAttractionsByActivity`)
+        .subscribe((response: any) => {
+            this.attractionsByActivityList$.next(response.templateData.attractionsByActivity.map((attraction: any) => {
+              return { ...attraction.activityData, isSelected: false }
+            }));
+
+            observer.next({});
+            observer.complete();
+        },
+        error => {
+          // todo: handle error
+          observer.error(error);
+          observer.complete();
+        });
+      }
+      else {
+        observer.complete();
+      }
+    });
   }
 
   // get Top Attractions
-  getTopAttractionsAPI() {
+  getTopAttractionsAPI(): Observable<any> {
+    return new Observable<any>((observer: Observer<any>) => {
+      if (this.topAttractions$.value.length === 0) {
+        this.httpClient.get(`${BASE_URL}getTopAttractions`)
+          .subscribe((response: any) => {
+            this.topAttractions$.next(
+              response.templateData.attractions.map((attraction: any) => {
+                return { ...attraction.attractionData, isSelected: false }
+              }));
 
-    if (this.topAttractions$.value.length === 0) {
-      this.httpClient.get(`${BASE_URL}getTopAttractions`)
-        .subscribe((response: any) => {
-          this.topAttractions$.next(
-            response.templateData.attractions.map((attraction: any) => {
-              return { ...attraction.attractionData, isSelected: false }
-            }));
-        },
-        error => {
-          // handle error
-        });
-    }
+              observer.next({});
+              observer.complete();
+          },
+          error => {
+            // handle error
+            observer.error(error);
+            observer.complete();
+          });
+      }
+      else {
+        observer.complete();
+      }
+    })
   }
 
   markAttractionAsSelected(id: string, selection: boolean) {
