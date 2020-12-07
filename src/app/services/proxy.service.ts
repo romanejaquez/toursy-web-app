@@ -25,9 +25,11 @@ export class ProxyService {
   getAllAppData() {
     return new Observable<any>((observer: Observer<any>) => {
       forkJoin(
-        this.getAllAttractionsAPI(),
-        this.getAttractionsByActivityAPI(),
-        this.getTopAttractionsAPI()).subscribe(
+        [
+          this.getAllAttractionsAPI(),
+          this.getAttractionsByActivityAPI(),
+          this.getTopAttractionsAPI()
+        ]).subscribe(
           response => {
             observer.next({});
             observer.complete();
