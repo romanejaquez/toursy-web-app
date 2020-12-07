@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ByRegionPageComponent } from './by-region-page.component';
+import { AttractionsPageComponent } from './attractions-page.component';
 
-describe('ByRegionPageComponent', () => {
-  let component: ByRegionPageComponent;
-  let fixture: ComponentFixture<ByRegionPageComponent>;
+describe('AttractionsPageComponent', () => {
+  let component: AttractionsPageComponent;
+  let fixture: ComponentFixture<AttractionsPageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ByRegionPageComponent ]
+      declarations: [ AttractionsPageComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ByRegionPageComponent);
+    fixture = TestBed.createComponent(AttractionsPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

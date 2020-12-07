@@ -1,0 +1,11 @@
+<div class="attractions-list-page">
+    <sub-header [title]="listBySubLabel" [subTitle]="listByLabel" [icon]="'arrow_back'"></sub-header>
+    <div class="attractions-list-container">
+        <div class="attractions-list-inner">
+            <ng-container *ngFor="let tile of attractionTiles">
+                <toursy-tile [tileModel]="tile"></toursy-tile>
+            </ng-container>  
+        </div>
+        
+    </div>
+</div>

@@ -1,0 +1,9 @@
+<header class="sub-header">
+    <span (click)="onIconClick()" class="material-icons">
+    {{ icon }}
+    </span>
+    <div class="sub-header-title">
+        <div *ngIf="subTitle" class="sub-header-title-sm">{{ subTitle }}</div>
+        <div class="sub-header-title-lg">{{ title }}</div>
+    </div>
+</header>

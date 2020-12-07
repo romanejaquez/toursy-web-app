@@ -13,25 +13,25 @@ export class TabNavComponent implements OnInit {
       icon: 'top_rated',
       label: 'Top Rated',
       id: '1',
-      route: 'toprated'
+      route: '/main/attractions/toprated'
     },
     {
       icon: 'by_region',
       label: 'By Region',
       id: '2',
-      route: 'byregion'
+      route: '/main/attractions/byregion'
     },
     {
       icon: 'by_activity',
       label: 'By Activity',
       id: '3',
-      route: 'byactivity'
+      route: '/main/attractions/byactivity'
     },
     {
       icon: 'map_view',
       label: 'Map View',
       id: '4',
-      route: 'mapview'
+      route: '/main/mapview'
     }
   ];
 
