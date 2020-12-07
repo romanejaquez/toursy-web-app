@@ -5,6 +5,8 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     box-shadow: 0px 0px 12px rgb(11 162 123);
+    position: relative;
+    z-index: 2;
 
     a {
         padding: 12px 8px;
