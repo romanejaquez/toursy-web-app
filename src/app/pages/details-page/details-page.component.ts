@@ -34,4 +34,8 @@ export class DetailsPageComponent implements OnInit {
     this.location.back();
   }
 
+  onAttractionFavorited() {
+    this.proxyService.markAttractionAsSelected(
+      this.currentAttraction.id, !this.currentAttraction.isSelected);
+  }
 }

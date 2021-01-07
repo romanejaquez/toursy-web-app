@@ -1,3 +1,15 @@
 <div class="map-page">
     <div #map id="map-canvas"></div>
+    <div class="map-toast" (click)="onMapToastClick()" [ngClass]="{ 'map-toast-show': showToast }">
+        <div class="map-toast-img" 
+        [style.background-image]="'url(' + mapSelectedAtraction?.img + ')'"
+        ></div>
+        <div class="map-toast-content">
+            <div class="map-toast-title">{{ mapSelectedAtraction?.name }}</div>
+            <div class="map-toast-subtitle">{{ mapSelectedAtraction?.province }}</div>
+        </div>
+        <div class="map-toast-logo">
+            <img src="./assets/icons/icon_toursy_green.svg" />
+        </div>
+    </div>
 </div>
