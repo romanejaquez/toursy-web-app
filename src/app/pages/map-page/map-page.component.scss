@@ -26,7 +26,7 @@
         background-position: center !important;
         background-size: cover !important;
         width: 100px;
-        height: 80px;
+        height: 85px;
         border-top-left-radius: 30px;
     }
     
@@ -37,6 +37,7 @@
         .map-toast-title {
             color: $darker-green;
             font-weight: 600;
+            font-size: 0.8em;
         }
 
         .map-toast-subtitle {
@@ -47,7 +48,7 @@
 
     .map-toast-logo {
         width: 40px;
-        padding: 10px;
+        padding: 20px;
 
         img {
             max-width: 100%;
