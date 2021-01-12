@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { AngularFireModule } from "@angular/fire";
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,6 +19,8 @@ import { NavContentComponent } from './components/nav-content/nav-content.compon
 import { AttractionsPageComponent } from './pages/attractions-page/attractions-page.component';
 import { AttractionsListPageComponent } from './pages/attractions-list-page/attractions-list-page.component';
 import { SubHeaderComponent } from './components/sub-header/sub-header.component';
+import { WelcomePageComponent } from './pages/welcome-page/welcome-page.component';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -37,12 +39,14 @@ import { SubHeaderComponent } from './components/sub-header/sub-header.component
     NavContentComponent,
     AttractionsPageComponent,
     AttractionsListPageComponent,
-    SubHeaderComponent
+    SubHeaderComponent,
+    WelcomePageComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig)
   ],
   providers: [],
   bootstrap: [AppComponent]

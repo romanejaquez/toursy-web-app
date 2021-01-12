@@ -3,5 +3,11 @@
         <span (click)="onToggleMenu()" class="material-icons">dehaze</span>
     </section>
     <section class="app-header-logo"></section>
-    <section class="app-header-right"></section>
+    <section class="app-header-right">
+        <ng-container *ngIf="(authUser | async)">
+            <div class="header-user-img" (click)="goToProfile()">
+                <img src="{{ (authUser | async)?.photoURL }}" />
+            </div>
+        </ng-container>
+    </section>
 </header>

@@ -8,6 +8,7 @@ import { FavoritesPageComponent } from './pages/favorites-page/favorites-page.co
 import { MainPageComponent } from './pages/main-page/main-page.component';
 import { MapPageComponent } from './pages/map-page/map-page.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
+import { WelcomePageComponent } from './pages/welcome-page/welcome-page.component';
 
 const routes: Routes = [
   {
@@ -41,7 +42,11 @@ const routes: Routes = [
     path: 'favorites'
   },
   {
-    redirectTo: '/main/attractions/toprated',
+    component: WelcomePageComponent,
+    path: 'welcome'
+  },
+  {
+    redirectTo: '/welcome',
     path: '',
     pathMatch: 'full'
   },

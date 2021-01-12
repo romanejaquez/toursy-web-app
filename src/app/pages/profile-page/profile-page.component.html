@@ -1,1 +1,13 @@
-<p>profile-page works!</p>
+<div class="profile-page app-page">
+    <div class="profile-page-top">
+        <div class="profile-page-photo">
+            <img class="photo-img" src="{{ (authUser | async)?.photoURL }}" />
+            <img class="logo-img" src="./assets/icons/icon_toursy_green.svg" />
+        </div>
+        <div class="profile-page-name">{{ (authUser | async)?.displayName }}</div>
+        <div class="profile-page-label">Preferred Attractions</div>
+        <div class="profile-page-favs-count">{{ (favorites | async)?.length }}</div>
+    </div>
+    <button class="main-btn main-btn-active" (click)="goToMain()">Go To Main Page</button>
+    <button class="main-btn main-btn-inactive logout-btn" (click)="logout()">Logout of Toursy</button>
+</div>

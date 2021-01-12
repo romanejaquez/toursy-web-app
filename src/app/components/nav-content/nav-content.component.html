@@ -8,5 +8,5 @@
         </span>
     </a>
     <a [routerLink]="['/profile']"><span class="material-icons">person</span>My Profile</a>
-    <a (click)="onLogout()"><span class="material-icons">exit_to_app</span>Logout</a>
+    <a *ngIf="(authUser | async)" (click)="onLogout()"><span class="material-icons">exit_to_app</span>Logout</a>
 </nav>
