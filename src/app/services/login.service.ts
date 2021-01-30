@@ -3,7 +3,6 @@ import { BehaviorSubject, Observable, Observer } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
 import firebase from 'firebase/app';
 import { Router } from '@angular/router';
-import { ProxyService } from './proxy.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +13,7 @@ export class LoginService {
   
   constructor(
     private auth: AngularFireAuth,
-    private router: Router,
-    private proxy: ProxyService, 
+    private router: Router
   ) { }
 
   loginWithGoogle(): Observable<any>{
@@ -33,12 +31,16 @@ export class LoginService {
 
   logout() {
     this.auth.signOut().then(() => {
-      this.authUser.next(null);
+      this.cleanUp();
       this.router.navigate(['/welcome']);
     });
   }
 
   getLoggedInUser() {
     return this.authUser.asObservable();
+  }
+
+  cleanUp() {
+    this.authUser.next(null);
   }
 }

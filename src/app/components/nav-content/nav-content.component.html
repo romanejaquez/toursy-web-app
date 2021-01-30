@@ -1,12 +1,13 @@
 <nav class="side-nav-links">
-    <a [routerLink]="['/main/attractions/toprated']"><span class="material-icons">home</span>Main</a>
-    <a [routerLink]="['/favorites']">
+    <a (click)="goToMain()"><span class="material-icons">home</span>Main</a>
+    <a *ngIf="(authUser | async)" [routerLink]="['/favorites']">
         <span class="material-icons">favorite</span>
         My Favorites
         <span class="favorites-count">
             <span>{{ (favorites | async)?.length }}</span>
         </span>
     </a>
-    <a [routerLink]="['/profile']"><span class="material-icons">person</span>My Profile</a>
+    <a *ngIf="(authUser | async)" [routerLink]="['/profile']"><span class="material-icons">person</span>My Profile</a>
     <a *ngIf="(authUser | async)" (click)="onLogout()"><span class="material-icons">exit_to_app</span>Logout</a>
+    <a *ngIf="!(authUser | async)" [routerLink]="['/welcome']"><span class="material-icons">login</span>Login</a>
 </nav>

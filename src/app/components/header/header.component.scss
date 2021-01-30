@@ -43,3 +43,44 @@
         }
     }
 }
+
+
+.light-theme {
+    .app-header {
+        background: #FFF !important;
+        box-shadow: none;
+
+        .app-header-menu .material-icons {
+            color: $main-green !important;
+        }
+
+        .app-header-logo {
+            background: url('./../../../assets/icons/toursy_logo_letters_green.svg') no-repeat;
+            background-position: center;
+            background-size: contain;
+            width: 30px;
+            height: 40px;
+            flex: 1;
+        }
+    }
+}
+
+.dark-theme {
+    .app-header {
+        background: $main-green !important;
+        box-shadow: 0px 0px 12px rgba(0,0,0, 0.2);
+
+        .app-header-menu .material-icons {
+            color: #FFF !important;
+        }
+
+        .app-header-logo {
+            background: url('./../../../assets/icons/toursy_logo_letters.svg') no-repeat;
+            background-position: center;
+            background-size: contain;
+            width: 30px;
+            height: 40px;
+            flex: 1;
+        }
+    }
+}

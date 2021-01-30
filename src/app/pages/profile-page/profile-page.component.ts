@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { LoginService } from 'src/app/services/login.service';
 import firebase from 'firebase/app';
 import { ProxyService } from 'src/app/services/proxy.service';
+import { ThemingService } from 'src/app/services/theming.service';
 
 @Component({
   selector: 'app-profile-page',
@@ -19,8 +20,11 @@ export class ProfilePageComponent implements OnInit {
   constructor(
     private proxyService: ProxyService,
     private loginService: LoginService,
-    private router: Router
-  ) { }
+    private router: Router,
+    private themingService: ThemingService,
+  ) {
+    this.themingService.setTheme('light-theme');
+  }
 
   ngOnInit(): void {
     this.authUser = this.loginService.getLoggedInUser();

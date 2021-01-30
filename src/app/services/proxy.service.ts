@@ -1,23 +1,53 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, forkJoin, observable, Observable, Observer } from 'rxjs';
+import { Injectable, OnDestroy } from '@angular/core';
+import { BehaviorSubject, forkJoin, Observable, Observer, Subscription } from 'rxjs';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { LoginService } from './login.service';
+import firebase from 'firebase/app';
 
 const BASE_URL = 'https://us-central1-toursy-242912.cloudfunctions.net/';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProxyService {
-
+export class ProxyService implements OnDestroy {
+  
+  authUser!: firebase.User;
+  loginServiceSub!: Subscription;
+  getAllAppDataSub!: Subscription;
   allAttractionsList$: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
   attractionsByActivityList$: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
   topAttractions$: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
   favoriteAttractions$: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(
+    private loginService: LoginService,
+    private firestore: AngularFirestore,
+    private httpClient: HttpClient) {
+
+      this.loginServiceSub = this.loginService.getLoggedInUser().subscribe((user: firebase.User) => {
+        this.authUser = user;
+
+        if (this.authUser) {
+          // restore the data from firebase
+          this.getAllAppDataSub = this.getAllAppData().subscribe(() => {
+            this.firestore.collection('favorites')
+            .doc(this.authUser.uid).ref.get().then(favs => {
+              let myFavs: any = favs.data();
+              this.getSavedFavorites(myFavs.favorites);
+            });
+          });
+        }
+      });
+    }
+
+  ngOnDestroy(): void {
+    this.loginServiceSub.unsubscribe();
+    this.getAllAppDataSub.unsubscribe();
+  }
 
   fetchInitialData() {
-    this.getAllAppData().subscribe(done => {
+    this.getAllAppDataSub = this.getAllAppData().subscribe(done => {
       // data is done loading
     });
   }
@@ -205,22 +235,51 @@ export class ProxyService {
     return foundAttraction;
   }
 
-  getFavorites() {
-    this.favoriteAttractions$.next(
-      this.getAllAttractionsCombined().filter(a => a.isSelected).
-      map(a => {
-        return {
-          id: a.id,
-          topLabel: a.name,
-          bottomLabel: a.province,
-          img: a.img,
-          isSelected: a.isSelected,
-          allowFavorites: true
+  getSavedFavorites(savedFavs: any[]) {
+    this.getAllAttractionsCombined().forEach((attr) => {
+      savedFavs.forEach(favId => {
+        if (attr.id === favId) {
+          attr.isSelected = true;
         }
-      }));
+      });
+    });
+
+    this.getFavorites();
+  }
+
+  getFavorites() {
+    let allFavorites = this.getAllAttractionsCombined().
+    filter(a => a.isSelected).
+    map(a => {
+      return {
+        id: a.id,
+        topLabel: a.name,
+        bottomLabel: a.province,
+        img: a.img,
+        isSelected: a.isSelected,
+        allowFavorites: true
+      }
+    });
+
+    this.favoriteAttractions$.next(allFavorites);
+
+    if (this.authUser) {
+        this.firestore.collection('favorites')
+        .doc(this.authUser.uid)
+        .set({
+          favorites: allFavorites.map((f) => f.id)
+        });
+    }
   }
 
   getFavoritesList() {
     return this.favoriteAttractions$.asObservable();
+  }
+
+  cleanUp() {
+    this.allAttractionsList$.next([]);
+    this.attractionsByActivityList$.next([]);
+    this.topAttractions$.next([]);
+    this.favoriteAttractions$.next([]);
   }
 }

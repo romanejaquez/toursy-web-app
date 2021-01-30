@@ -1,7 +1,10 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { TileModel } from 'src/app/models/tile-model';
+import { LoginService } from 'src/app/services/login.service';
 import { ProxyService } from 'src/app/services/proxy.service';
+import firebase from 'firebase/app';
 
 @Component({
   selector: 'toursy-tile',
@@ -11,13 +14,17 @@ import { ProxyService } from 'src/app/services/proxy.service';
 })
 export class ToursyTileComponent implements OnInit {
 
+  authUser!: Observable<firebase.User>;
+
   @Input() tileModel!: TileModel;
 
   constructor(
+    private loginService: LoginService,
     private router: Router,
     private proxyService: ProxyService) { }
 
   ngOnInit(): void {
+    this.authUser = this.loginService.getLoggedInUser();
   }
 
   markAttractionAsSelected(event: any, id: string) {

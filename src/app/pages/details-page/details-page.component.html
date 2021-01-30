@@ -9,7 +9,7 @@
                     <div>{{ currentAttraction.province }}</div>
                 </div>
                 <div class="attraction-details-top-left">
-                    <span (click)="onAttractionFavorited()" class="material-icons">{{ currentAttraction.isSelected ? 'favorite' : 'favorite_border' }}</span>
+                    <span *ngIf="(authUser | async)" (click)="onAttractionFavorited()" class="material-icons">{{ currentAttraction.isSelected ? 'favorite' : 'favorite_border' }}</span>
                 </div>
             </div>
             <div class="attraction-details-bottom">

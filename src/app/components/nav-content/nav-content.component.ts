@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { LoginService } from 'src/app/services/login.service';
 import { ProxyService } from 'src/app/services/proxy.service';
 import firebase from 'firebase/app';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav-content',
@@ -16,6 +17,7 @@ export class NavContentComponent implements OnInit {
   favorites!: Observable<any[]>;
 
   constructor(
+    private router: Router,
     private proxyService: ProxyService,
     private loginService: LoginService) { }
 
@@ -26,5 +28,11 @@ export class NavContentComponent implements OnInit {
 
   onLogout() {
     this.loginService.logout();
+  }
+
+  goToMain() {
+    this.proxyService.getAllAppData().subscribe(() => {
+      this.router.navigate(['/main/attractions/toprated']);
+    });
   }
 }

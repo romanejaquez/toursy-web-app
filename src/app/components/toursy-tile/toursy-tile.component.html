@@ -1,6 +1,6 @@
 <div class="toursy-tile" [style.background-image]="'url(' + tileModel.img + ')'" (click)="onTileClick()">
     <div class="toursy-tile-top">
-        <span *ngIf="tileModel.allowFavorites" (click)="markAttractionAsSelected($event, tileModel.id)" class="favorite-icon material-icons">{{ tileModel.isSelected ? 'favorite' : 'favorite_border' }}</span>
+        <span *ngIf="tileModel.allowFavorites && (authUser | async)" (click)="markAttractionAsSelected($event, tileModel.id)" class="favorite-icon material-icons">{{ tileModel.isSelected ? 'favorite' : 'favorite_border' }}</span>
     </div>
     <div class="toursy-tile-bottom">
         <div class="toursy-tile-label toursy-tile-top-label">{{ tileModel.topLabel }}</div>

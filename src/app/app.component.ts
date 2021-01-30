@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { ProxyService } from './services/proxy.service';
+import { ThemingService } from './services/theming.service';
 
 @Component({
   selector: 'app-root',
@@ -8,9 +10,14 @@ import { ProxyService } from './services/proxy.service';
 })
 export class AppComponent implements OnInit {
 
-  constructor(private proxyService: ProxyService) {}
+  theme!: Observable<string>;
+
+  constructor(
+    private themingService: ThemingService,
+    private proxyService: ProxyService) {}
 
   ngOnInit(): void {
+    this.theme = this.themingService.getTheme();
     this.proxyService.fetchInitialData();
   }
 }

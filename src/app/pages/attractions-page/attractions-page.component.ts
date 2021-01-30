@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { TileModel } from 'src/app/models/tile-model';
 import { ProxyService } from 'src/app/services/proxy.service';
+import { ThemingService } from 'src/app/services/theming.service';
 
 @Component({
   selector: 'app-attractions-page',
@@ -19,7 +20,11 @@ export class AttractionsPageComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private proxyService: ProxyService) { }
+    private proxyService: ProxyService,
+    private themingService: ThemingService,
+  ) {
+    this.themingService.setTheme('dark-theme');
+  }
 
   ngOnInit(): void {
     this.routeSub = this.activatedRoute.params.subscribe(params => {
